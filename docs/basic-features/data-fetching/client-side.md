@@ -1,18 +1,18 @@
 ---
-description: 'Learn about client-side data fetching, and how to use SWR, a data fetching React hook library that handles caching, revalidation, focus tracking, refetching on interval and more.'
+description: 'クライアント側でのデータ取得に関する知識を深め、キャッシュの管理、データの再バリデーション、フォーカス追跡、一定間隔でのデータの再取得などを行うReactフックライブラリであるSWRの使い方について解説します。'
 ---
 
-# Client-side data fetching
+# クライアント側のデータ取得
 
-Client-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to pre-render your data, or when the content of your pages needs to update frequently. Unlike the server-side rendering APIs, you can use client-side data fetching at the component level.
+クライアント側のデータ取得は、ページが SEO インデックスを必要としない場合、データを事前にレンダリングする必要がない場合、またはページのコンテンツを頻繁に更新する必要がある場合に便利です。サーバー側のレンダリング API とは異なり、クライアント側のデータ取得をコンポーネントレベルで使用できます。
 
-If done at the page level, the data is fetched at runtime, and the content of the page is updated as the data changes. When used at the component level, the data is fetched at the time of the component mount, and the content of the component is updated as the data changes.
+ページレベルで行った場合、データはランタイムで取得され、データの変更に合わせてページの内容が更新されます。コンポーネントレベルで使用した場合、データはコンポーネントのマウント時に取得され、データの変更に合わせてコンポーネントの内容が更新されます。
 
-It's important to note that using client-side data fetching can affect the performance of your application and the load speed of your pages. This is because the data fetching is done at the time of the component or pages mount, and the data is not cached.
+クライアント側のデータ取得を使用すると、アプリケーションのパフォーマンスやページの読み込み速度に影響を与える可能性があることに注意が必要です。これは、データの取得がコンポーネントまたはページのマウント時に行われ、データがキャッシュされないためです。
 
-## Client-side data fetching with useEffect
+## useEffectを使ったクライアント側のデータ取得
 
-The following example shows how you can fetch data on the client side using the useEffect hook.
+以下の例は、useEffect フックを使ってクライアント側でデータを取得する方法を示しています。
 
 ```jsx
 function Profile() {
@@ -29,8 +29,8 @@ function Profile() {
       })
   }, [])
 
-  if (isLoading) return <p>Loading...</p>
-  if (!data) return <p>No profile data</p>
+  if (isLoading) return <p>読み込み中。</p>
+  if (!data) return <p>プロファイルデータがありません。</p>
 
   return (
     <div>
@@ -41,13 +41,13 @@ function Profile() {
 }
 ```
 
-## Client-side data fetching with SWR
+## SWR を使ったクライアント側のデータ取得
 
-The team behind Next.js has created a React hook library for data fetching called [**SWR**](https://swr.vercel.app/). It is **highly recommended** if you are fetching data on the client-side. It handles caching, revalidation, focus tracking, refetching on intervals, and more.
+Next.js の開発チームは、[**SWR**](https://swr.vercel.app/)というデータ取得用の React フックライブラリを作成しました。クライアント側でデータを取得する際には SWR を使用することを**強くお勧めします。**SWR はキャッシュの管理、再検証、フォーカス追跡、一定間隔での再取得などを扱います。
 
-Using the same example as above, we can now use SWR to fetch the profile data. SWR will automatically cache the data for us and will revalidate the data if it becomes stale.
+上記の例と同じように、今度は SWR を使ってプロファイルデータを取得します。SWR は自動的にデータをキャッシュし、データが古くなったら再検証します。
 
-For more information on using SWR, check out the [SWR docs](https://swr.vercel.app/docs/getting-started).
+ SWR の使用方法についての詳細は、[SWRのドキュメント](https://swr.vercel.app/docs/getting-started)をご覧ください。
 
 ```jsx
 import useSWR from 'swr'
@@ -57,8 +57,8 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 function Profile() {
   const { data, error } = useSWR('/api/profile-data', fetcher)
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
+  if (error) return <div>読み込みに失敗しました。</div>
+  if (!data) return <div>読み込み中。</div>
 
   return (
     <div>
@@ -69,13 +69,13 @@ function Profile() {
 }
 ```
 
-## Related
+## 関連事項情報
 
-For more information on what to do next, we recommend the following sections:
+次のステップや更に詳しい情報を知りたい場合は、以下に示すセクションを参照することをお勧めします。
 
 <div class="card">
   <a href="/docs/routing/introduction.md">
-    <b>Routing:</b>
-    <small>Learn more about routing in Next.js.</small>
+    <b>ルーティング:</b>
+    <small>Next.jsでのルーティングについては、こちらをご覧ください。</small>
   </a>
 </div>
